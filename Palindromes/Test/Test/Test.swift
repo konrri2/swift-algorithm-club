@@ -66,4 +66,71 @@ class PalindromeTests: XCTestCase {
         XCTAssertFalse(isPalindrome("a"))
         XCTAssertFalse(isPalindrome("power"))
     }
+    
+    
+    let str10 = String(repeating: "a", count: 10)
+    let str1k = String(repeating: "a", count: 1024)
+    let str10k = String(repeating: "a", count: 10*1024)
+    let str20k = String(repeating: "a", count: 20*1024)
+    let str50k = String(repeating: "a", count: 50*1024)
+    let str1M = String(repeating: "a", count: 1024*1024)
+
+    func testPerformance_offset_1k() {
+        self.measure {
+            let ret = isPalindrome(str1k)
+            XCTAssertTrue(ret)
+        }
+    }
+    
+    func testPerformance_formIndex_1k() {
+        self.measure {
+            let ret = isPalindrome2(str1k)
+            XCTAssertTrue(ret)
+        }
+    }
+    
+    func testPerformance_offset_10k() {
+        self.measure {
+            let ret = isPalindrome(str10k)
+            XCTAssertTrue(ret)
+        }
+    }
+    
+    func testPerformance_formIndex_10k() {
+        self.measure {
+            let ret = isPalindrome2(str10k)
+            XCTAssertTrue(ret)
+        }
+    }
+    
+    //2.7 sec
+    func testPerformance_offset_20k() {
+        self.measure {
+            let ret = isPalindrome(str20k)
+            XCTAssertTrue(ret)
+        }
+    }
+    
+    //0.00 sec
+    func testPerformance_formIndex_20k() {
+        self.measure {
+            let ret = isPalindrome2(str20k)
+            XCTAssertTrue(ret)
+        }
+    }
+    
+    //too long
+    func testPerformance_offset_50k() {
+        self.measure {
+            let ret = isPalindrome(str50k)
+            XCTAssertTrue(ret)
+        }
+    }
+    
+    func testPerformance_formIndex_50k() {
+        self.measure {
+            let ret = isPalindrome2(str50k)
+            XCTAssertTrue(ret)
+        }
+    }
 }
